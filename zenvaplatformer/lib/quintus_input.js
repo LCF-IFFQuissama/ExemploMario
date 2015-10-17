@@ -3,14 +3,15 @@
 Quintus.Input = function(Q) {
   var KEY_NAMES = { LEFT: 37, RIGHT: 39, SPACE: 32,
                     UP: 38, DOWN: 40,
-                    Z: 90, X: 88   
+                    Z: 90, X: 88, F: 70   
                   };
   
   var DEFAULT_KEYS = { LEFT: 'left', RIGHT: 'right',
                        UP: 'up',     DOWN: 'down',
                        SPACE: 'fire',
                        Z: 'fire',
-                       X: 'action' };
+                       X: 'action'
+					   F: 'fire'};
 
   var DEFAULT_TOUCH_CONTROLS  = [ ['left','<' ],
                             ['right','>' ],
