@@ -10,7 +10,7 @@ Quintus.Input = function(Q) {
                        UP: 'up',     DOWN: 'down',
                        SPACE: 'fire',
                        Z: 'fire',
-                       X: 'action'
+                       X: 'action', 
 					   A: 'letraA',
 					   B: 'letraB',
 					   C: 'letraC',
