@@ -36,8 +36,10 @@
 			        }
 			        if(Q.inputs['letraA'] || Q.inputs['letraB'] || Q.inputs['letraC'] || Q.inputs['letraD'] )
 			        {
-				         Q.clearStages();
-				        Q.stageScene("level2");				
+				        Q.clearStages();
+				        Q.stageScene("level2");	
+						Q.stageScene("dialogo",1);
+						Q.stageScene("menu",2);
 			        }
 		        }                    
                 	});
@@ -83,7 +85,7 @@
                     y: -100
                 }),menu);                
             var destino1 = stage.insert(new Q.UI.Text({ 
-                    label: "A - Mato de Pipa      ",
+                    label: "A - Sobradinho      ",
                     color: "black",
                     x: 0,
                     y: -75
@@ -118,7 +120,13 @@
                 //this.p.initialY = this.p.y;
             }            
         });
-
+		Q.Sprite.extend("sobradinho", {
+            init: function(p) {
+                this._super(p, {vy: -100, rangeY: 200 , });
+                //this.add("2d");
+                //this.p.initialY = this.p.y;
+            }            
+        });
 
         //Componente geral de testemunhas (inimigos, do tutorial)
         Q.component("commonEnemy1", {
@@ -127,22 +135,21 @@
                 entity.on("bump.left,bump.right,bump.bottom",function(collision) {
                     if(collision.obj.isA("Player")) {                        
                         var testemunho = Q("UI.Text",1).items[0];
-                        testemunho.p.label = 'Ele só pode ser um bandido fugido das UPPs';
+                        testemunho.p.label = 'Ele pediu informação sobre aulas de violão';
 
                     }
                 });
             },
             
         });
-		
-		      
+
 		Q.component("commonEnemy2", {
         added: function() {
             var entity = this.entity;
 				entity.on("bump.left,bump.right,bump.bottom",function(collision) {
                 if(collision.obj.isA("Player")) {                        
                     var testemunho = Q("UI.Text",1).items[0];
-                    testemunho.p.label = 'bandido upp 2';
+                    testemunho.p.label = 'Ele queria assistir filmes';
 
                 }
             });
@@ -156,7 +163,7 @@
 				entity.on("bump.left,bump.right,bump.bottom",function(collision) {
                 if(collision.obj.isA("Player")) {                        
                     var testemunho = Q("UI.Text",1).items[0];
-                    testemunho.p.label = 'bandido upp 3';
+                    testemunho.p.label = 'Ele queria visitar a antiga estação de trem de Quissamã';
 
                 }
             });
@@ -235,7 +242,7 @@
             }
         });
 		
-				Q.Sprite.extend("testemunha03", {
+			Q.Sprite.extend("testemunha03", {
             init: function(p) {
                 this._super(p, {vx: -100, defaultDirection: "left"});
                 this.add("2d, aiBounce, commonEnemy3");                
@@ -288,7 +295,7 @@
 */
 
                         //load assets
-                        Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png", function() {
+                        Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png", function() {
 				Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});                    
                                 Q.stageScene("level1");
                                 Q.stageScene("dialogo",1);
@@ -330,16 +337,32 @@
             stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
           
         });
-
-
-
-
+			Q.scene("level2",function(stage) {          
+				var background = new Q.TileLayer({ dataAsset: 'level2.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+				stage.insert(background);   
+				stage.collisionLayer(new Q.TileLayer({ dataAsset: 'level2.tmx', layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));      
 			
+				var player = stage.insert(new Q.Player());
+				stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+			});
+
 			Q.scene("level2",function(stage) {          
 					var background = new Q.TileLayer({ dataAsset: 'level2.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
 					stage.insert(background);   
 					stage.collisionLayer(new Q.TileLayer({ dataAsset: 'level2.tmx', layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));      
 					//setupLevel("level2",stage);
+					
+					var levelAssets = [
+			["sobradinho", {x: 10*70, y: 411, asset: "sobradinho2.png", points:"[[0,0],[1,1]]"}],
+                ["testemunha01", {x: 18*70, y: 6*70, asset: "testemunha1.png"}],
+                ["testemunha02", {x: 5*70, y: 6*70, asset: "testemunha2.png"}],
+                ["testemunha03", {x: 12*70, y: 120, asset: "testemunha3.png"}]                
+            ];
+            
+            //load level assets
+            stage.loadAssets(levelAssets);  
+					
 					var player = stage.insert(new Q.Player());
 					stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 
