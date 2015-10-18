@@ -25,7 +25,7 @@
 				init: function(p) {
 					this._super(p, { asset: "player.png", x: 110, y: 50, jumpSpeed: -380});
 					this.add('2d, platformerControls');              
-                                       
+                                        
 			        },
 			        step: function(dt) {
 			        if(Q.inputs['left'] && this.p.direction == 'right') {
@@ -59,27 +59,51 @@
         //mENU?
         Q.scene("gameStats", function(stage) {
             var statsContainer = stage.insert(new Q.UI.Container({
-                fill: "gray",
+                fill: "white",
                 x: 960/2,
                 y: 620,
                 border: 1,
                 shadow: 3,
                 shadowColor: "rgba(0,0,0,0.5)",
                 w: 960,
-                h: 40
+                h: 160
                 })
             );
                 
-            var lives = stage.insert(new Q.UI.Text({ 
-                    label: "Lives x 3",
-                    color: "white",
+            var testemunha1 = stage.insert(new Q.UI.Text({ 
+                    label: "Testemunha1: Ele foi pra lá      ",
+                    color: "black",
+                    x: -300,
+                    y: -50
+                }),statsContainer);
+            var testemunha2 = stage.insert(new Q.UI.Text({ 
+                    label: "Testemunha2: Que bandido, dever ser da UPP",
+                    color: "black",
+                    x: -212,
+                    y: -25
+                }),statsContainer);
+            var testemunha3 = stage.insert(new Q.UI.Text({ 
+                    label: "Testemunha3: Zica esse crime",
+                    color: "black",
                     x: -300,
                     y: 0
                 }),statsContainer);
             
-            var coins = stage.insert(new Q.UI.Text({ 
-                    label: "Coins x 0",
-                    color: "white",
+            var destino1 = stage.insert(new Q.UI.Text({ 
+                    label: "A - Mato de Pipa      ",
+                    color: "black",
+                    x: 300,
+                    y: -50
+                }),statsContainer);
+            var destino2 = stage.insert(new Q.UI.Text({ 
+                    label: "B - Jurubatiba         ",
+                    color: "black",
+                    x: 300,
+                    y: -25
+                }),statsContainer);
+            var destino3 = stage.insert(new Q.UI.Text({ 
+                    label: "C - Igreja do Carmo",
+                    color: "black",
                     x: 300,
                     y: 0
                 }),statsContainer);
