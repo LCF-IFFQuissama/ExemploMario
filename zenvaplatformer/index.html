@@ -34,16 +34,22 @@
 			        if(Q.inputs['right']  && this.p.direction == 'left') {
 				        this.p.flip = false;                    
 			        }
-			        if(Q.inputs['letraA'] || Q.inputs['letraB'] || Q.inputs['letraC'] || Q.inputs['letraD'] )
+			        if(Q.inputs['letraA'])
 			        {
 				        Q.clearStages();
 				        Q.stageScene("level2");	
 						Q.stageScene("dialogo",1);
 						Q.stageScene("menu",2);
 			        }
-		        }                    
+					if(Q.inputs['letraC'])
+			        {
+				        Q.clearStages();
+				        Q.stageScene("level3");	
+						Q.stageScene("dialogo",1);
+						Q.stageScene("menu",2);
+			        }
+					}                    
                 	});
-
         //Menu dialogo com as testemunhas
         Q.scene("dialogo", function(stage) {
             var dialogo = stage.insert(new Q.UI.Container({
@@ -121,6 +127,13 @@
             }            
         });
 		Q.Sprite.extend("sobradinho", {
+            init: function(p) {
+                this._super(p, {vy: -100, rangeY: 200 , });
+                //this.add("2d");
+                //this.p.initialY = this.p.y;
+            }            
+        });
+        Q.Sprite.extend("IgrejaCarmo", {
             init: function(p) {
                 this._super(p, {vy: -100, rangeY: 200 , });
                 //this.add("2d");
@@ -295,7 +308,7 @@
 */
 
                         //load assets
-                        Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png", function() {
+                        Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx ",function() {
 				Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});                    
                                 Q.stageScene("level1");
                                 Q.stageScene("dialogo",1);
@@ -354,7 +367,7 @@
 					//setupLevel("level2",stage);
 					
 					var levelAssets = [
-			["sobradinho", {x: 10*70, y: 411, asset: "sobradinho2.png", points:"[[0,0],[1,1]]"}],
+			["sobradinho", {x: 10*70, y: 411, asset: "sobradinho2.png", points:"[[0,0],[1,1]]"}], //carrega o sobradinho e as testemunhas
                 ["testemunha01", {x: 18*70, y: 6*70, asset: "testemunha1.png"}],
                 ["testemunha02", {x: 5*70, y: 6*70, asset: "testemunha2.png"}],
                 ["testemunha03", {x: 12*70, y: 120, asset: "testemunha3.png"}]                
@@ -367,7 +380,37 @@
 					stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 
 				});
+			
+			Q.scene("level3",function(stage) {          
+				var background = new Q.TileLayer({ dataAsset: 'level3.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+				stage.insert(background);   
+				stage.collisionLayer(new Q.TileLayer({ dataAsset: 'level3.tmx', layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));      
+			
+				var player = stage.insert(new Q.Player());
+				stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 
+			});
+			
+			Q.scene("level3",function(stage) {          
+					var background = new Q.TileLayer({ dataAsset: 'level3.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+					stage.insert(background);   
+					stage.collisionLayer(new Q.TileLayer({ dataAsset: 'level3.tmx', layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));      
+					//setupLevel("level2",stage);
+					
+					var levelAssets = [
+			["IgrejaCarmo", {x: 10*70, y: 411, asset: "igrejaDoCarmo.png", points:"[[0,0],[1,1]]"}], //carrega o sobradinho e as testemunhas
+                ["testemunha01", {x: 18*70, y: 6*70, asset: "testemunha1.png"}],
+                ["testemunha02", {x: 5*70, y: 6*70, asset: "testemunha2.png"}],
+                ["testemunha03", {x: 12*70, y: 120, asset: "testemunha3.png"}]                
+            ];
+            
+            //load level assets
+            stage.loadAssets(levelAssets);  
+					
+					var player = stage.insert(new Q.Player());
+					stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+				});
         </script>
     </body>
 </html>
