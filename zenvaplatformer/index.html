@@ -48,6 +48,8 @@
                 var entity = this.entity;
                 entity.on("bump.left,bump.right,bump.bottom",function(collision) {
                     if(collision.obj.isA("Player")) {                        
+                        var coinsLabel = Q("UI.Text",1).items[0];
+                        coinsLabel.p.label = 'Coins x ';
 
                     }
                 });
@@ -57,8 +59,8 @@
 
 
         //mENU?
-        Q.scene("gameStats", function(stage) {
-            var statsContainer = stage.insert(new Q.UI.Container({
+        Q.scene("menu", function(stage) {
+            var menu = stage.insert(new Q.UI.Container({
                 fill: "white",
                 x: 960/2,
                 y: 620,
@@ -69,44 +71,31 @@
                 h: 160
                 })
             );
-                
-            var testemunha1 = stage.insert(new Q.UI.Text({ 
-                    label: "Testemunha1: Ele foi pra lá      ",
-                    color: "black",
-                    x: -300,
-                    y: -50
-                }),statsContainer);
-            var testemunha2 = stage.insert(new Q.UI.Text({ 
-                    label: "Testemunha2: Que bandido, dever ser da UPP",
+            var testemunha = stage.insert(new Q.UI.Text({ 
+                    label: "",
                     color: "black",
                     x: -212,
                     y: -25
-                }),statsContainer);
-            var testemunha3 = stage.insert(new Q.UI.Text({ 
-                    label: "Testemunha3: Zica esse crime",
-                    color: "black",
-                    x: -300,
-                    y: 0
-                }),statsContainer);
-            
+                }),menu);
+                            
             var destino1 = stage.insert(new Q.UI.Text({ 
                     label: "A - Mato de Pipa      ",
                     color: "black",
                     x: 300,
                     y: -50
-                }),statsContainer);
+                }),menu);
             var destino2 = stage.insert(new Q.UI.Text({ 
                     label: "B - Jurubatiba         ",
                     color: "black",
                     x: 300,
                     y: -25
-                }),statsContainer);
+                }),menu);
             var destino3 = stage.insert(new Q.UI.Text({ 
                     label: "C - Igreja do Carmo",
                     color: "black",
                     x: 300,
                     y: 0
-                }),statsContainer);
+                }),menu);
         });
         
         //enemy that walks around          
@@ -165,7 +154,7 @@
                         Q.load("tiles_map.png, player.png, slime.png, level1.tmx, level2.tmx", function() {
                                 Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});          
                                 Q.stageScene("level1");
-                                Q.stageScene("gameStats",1);
+                                Q.stageScene("menu",1);
                         });
 
 
