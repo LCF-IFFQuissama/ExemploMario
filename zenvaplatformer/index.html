@@ -56,7 +56,7 @@
                 })
             );
             var testemunha = stage.insert(new Q.UI.Text({ 
-                    label: "x",
+                    label: "",
                     color: "black",
                     x: 0,
                     y: -60
@@ -121,7 +121,7 @@
 
 
         //Componente geral de testemunhas (inimigos, do tutorial)
-        Q.component("commonEnemy", {
+        Q.component("commonEnemy1", {
             added: function() {
                 var entity = this.entity;
                 entity.on("bump.left,bump.right,bump.bottom",function(collision) {
@@ -134,14 +134,113 @@
             },
             
         });
+		
+		      
+		Q.component("commonEnemy2", {
+        added: function() {
+            var entity = this.entity;
+				entity.on("bump.left,bump.right,bump.bottom",function(collision) {
+                if(collision.obj.isA("Player")) {                        
+                    var testemunho = Q("UI.Text",1).items[0];
+                    testemunho.p.label = 'bandido upp 2';
+
+                }
+            });
+        },
+            
+        });
+		
+		Q.component("commonEnemy3", {
+        added: function() {
+            var entity = this.entity;
+				entity.on("bump.left,bump.right,bump.bottom",function(collision) {
+                if(collision.obj.isA("Player")) {                        
+                    var testemunho = Q("UI.Text",1).items[0];
+                    testemunho.p.label = 'bandido upp 3';
+
+                }
+            });
+        },
+            
+        });
+
 
 	//Testemunhas
         //No tutorial -> enemy that walks around          
-        Q.Sprite.extend("GroundEnemy", {
+        Q.Sprite.extend("testemunha01", {
             init: function(p) {
                 this._super(p, {vx: -100, defaultDirection: "left"});
-                this.add("2d, aiBounce, commonEnemy");                
+                this.add("2d, aiBounce, commonEnemy1");                
             },
+			
+            step: function(dt) {        
+                var dirX = this.p.vx/Math.abs(this.p.vx);
+                var ground = Q.stage().locate(this.p.x, this.p.y + this.p.h/2 + 1, Q.SPRITE_DEFAULT);
+                var nextTile = Q.stage().locate(this.p.x + dirX * this.p.w/2 + dirX, this.p.y + this.p.h/2 + 1, Q.SPRITE_DEFAULT);
+                
+                //if we are on ground and there is a cliff
+                if(!nextTile && ground) {
+                    if(this.p.vx > 0) {
+                        if(this.p.defaultDirection == "right") {
+                            this.p.flip = "x";
+                        }
+                        else {
+                            this.p.flip = false;
+                        }
+                    }
+                    else {
+                        if(this.p.defaultDirection == "left") {
+                            this.p.flip = "x";
+                        }
+                        else {
+                            this.p.flip = false;
+                        }
+                    }
+                    this.p.vx = -this.p.vx;
+                }
+            }
+        });
+		
+		Q.Sprite.extend("testemunha02", {
+            init: function(p) {
+                this._super(p, {vx: -100, defaultDirection: "left"});
+                this.add("2d, aiBounce, commonEnemy2");                
+            },
+			
+            step: function(dt) {        
+                var dirX = this.p.vx/Math.abs(this.p.vx);
+                var ground = Q.stage().locate(this.p.x, this.p.y + this.p.h/2 + 1, Q.SPRITE_DEFAULT);
+                var nextTile = Q.stage().locate(this.p.x + dirX * this.p.w/2 + dirX, this.p.y + this.p.h/2 + 1, Q.SPRITE_DEFAULT);
+                
+                //if we are on ground and there is a cliff
+                if(!nextTile && ground) {
+                    if(this.p.vx > 0) {
+                        if(this.p.defaultDirection == "right") {
+                            this.p.flip = "x";
+                        }
+                        else {
+                            this.p.flip = false;
+                        }
+                    }
+                    else {
+                        if(this.p.defaultDirection == "left") {
+                            this.p.flip = "x";
+                        }
+                        else {
+                            this.p.flip = false;
+                        }
+                    }
+                    this.p.vx = -this.p.vx;
+                }
+            }
+        });
+		
+				Q.Sprite.extend("testemunha03", {
+            init: function(p) {
+                this._super(p, {vx: -100, defaultDirection: "left"});
+                this.add("2d, aiBounce, commonEnemy3");                
+            },
+			
             step: function(dt) {        
                 var dirX = this.p.vx/Math.abs(this.p.vx);
                 var ground = Q.stage().locate(this.p.x, this.p.y + this.p.h/2 + 1, Q.SPRITE_DEFAULT);
@@ -171,7 +270,7 @@
         });
         
         //enemy that goes up and down
-        Q.Sprite.extend("VerticalEnemy", {
+      /*  Q.Sprite.extend("VerticalEnemy", {
             init: function(p) {
                 this._super(p, {vy: -100, rangeY: 200, gravity: 0 });
                 this.add("2d, commonEnemy");                
@@ -186,7 +285,7 @@
                 } 
             }
         });
-
+*/
 
                         //load assets
                         Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png", function() {
@@ -218,9 +317,9 @@
             //level assets. format must be as shown: [[ClassName, params], .. ] 
             var levelAssets = [
 		["casa", {x: 10*70, y: 411, asset: "matopipa2.png", points:"[[0,0],[1,1]]"}],
-                ["GroundEnemy", {x: 18*70, y: 6*70, asset: "testemunha1.png"}],
-                ["GroundEnemy", {x: 5*70, y: 6*70, asset: "testemunha2.png"}],
-                ["GroundEnemy", {x: 12*70, y: 120, asset: "testemunha3.png"}]                
+                ["testemunha01", {x: 18*70, y: 6*70, asset: "testemunha1.png"}],
+                ["testemunha02", {x: 5*70, y: 6*70, asset: "testemunha2.png"}],
+                ["testemunha03", {x: 12*70, y: 120, asset: "testemunha3.png"}]                
             ];
             
             //load level assets
