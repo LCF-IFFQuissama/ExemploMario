@@ -20,7 +20,7 @@
                     width: 960,
                     height: 640
                 }).controls().touch();   
-			//player
+			//Jogador Investigador
 			Q.Sprite.extend("Player",{
 				init: function(p) {
 					this._super(p, { asset: "player.png", x: 110, y: 50, jumpSpeed: -380});
@@ -42,14 +42,92 @@
 		        }                    
                 	});
 
-        //component for common enemy behaviors
+        //Menu dialogo com as testemunhas
+        Q.scene("dialogo", function(stage) {
+            var dialogo = stage.insert(new Q.UI.Container({
+                fill: "gray",
+                x: 960/2-150,
+                y: 620,
+                border: 1,
+                shadow: 3,
+                shadowColor: "rgba(0,0,0,0.5)",
+                w: 550,
+                h: 230
+                })
+            );
+            var testemunha = stage.insert(new Q.UI.Text({ 
+                    label: "x",
+                    color: "black",
+                    x: 0,
+                    y: -60
+                }),dialogo);
+        });
+
+        //Menu
+        Q.scene("menu", function(stage) {
+            var menu = stage.insert(new Q.UI.Container({
+                fill: "white",
+                x: 960/2+300,
+                y: 620,
+                border: 1,
+                shadow: 3,
+                shadowColor: "rgba(0,0,0,0.5)",
+                w: 290,
+                h: 230
+                })
+            );
+            var opcao = stage.insert(new Q.UI.Text({ 
+                    label: "Digite uma das opções:",
+                    color: "red",
+                    x: 0,
+                    y: -100
+                }),menu);                
+            var destino1 = stage.insert(new Q.UI.Text({ 
+                    label: "A - Mato de Pipa      ",
+                    color: "black",
+                    x: 0,
+                    y: -75
+                }),menu);
+            var destino2 = stage.insert(new Q.UI.Text({ 
+                    label: "B - Jurubatiba         ",
+                    color: "black",
+                    x: 0,
+                    y: -50
+                }),menu);
+            var destino3 = stage.insert(new Q.UI.Text({ 
+                    label: "C - Igreja do Carmo",
+                    color: "black",
+                    x: 0,
+                    y: -25
+                }),menu);
+            var destino4 = stage.insert(new Q.UI.Text({ 
+                    label: "D - Voltar                 ",
+                    color: "black",
+                    x: 0,
+                    y: 0
+                }),menu);
+        });
+
+
+        
+
+        Q.Sprite.extend("casa", {
+            init: function(p) {
+                this._super(p, {vy: -100, rangeY: 200 , });
+                //this.add("2d");
+                //this.p.initialY = this.p.y;
+            }            
+        });
+
+
+        //Componente geral de testemunhas (inimigos, do tutorial)
         Q.component("commonEnemy", {
             added: function() {
                 var entity = this.entity;
                 entity.on("bump.left,bump.right,bump.bottom",function(collision) {
                     if(collision.obj.isA("Player")) {                        
-                        var coinsLabel = Q("UI.Text",1).items[0];
-                        coinsLabel.p.label = 'Coins x ';
+                        var testemunho = Q("UI.Text",1).items[0];
+                        testemunho.p.label = 'Ele só pode ser um bandido fugido das UPPs';
 
                     }
                 });
@@ -57,48 +135,8 @@
             
         });
 
-
-        //mENU?
-        Q.scene("menu", function(stage) {
-            var menu = stage.insert(new Q.UI.Container({
-                fill: "white",
-                x: 960/2,
-                y: 620,
-                border: 1,
-                shadow: 3,
-                shadowColor: "rgba(0,0,0,0.5)",
-                w: 970,
-                h: 160
-                })
-            );
-            var testemunha = stage.insert(new Q.UI.Text({ 
-                    label: "",
-                    color: "black",
-                    x: -212,
-                    y: -25
-                }),menu);
-                            
-            var destino1 = stage.insert(new Q.UI.Text({ 
-                    label: "A - Mato de Pipa      ",
-                    color: "black",
-                    x: 300,
-                    y: -50
-                }),menu);
-            var destino2 = stage.insert(new Q.UI.Text({ 
-                    label: "B - Jurubatiba         ",
-                    color: "black",
-                    x: 300,
-                    y: -25
-                }),menu);
-            var destino3 = stage.insert(new Q.UI.Text({ 
-                    label: "C - Igreja do Carmo",
-                    color: "black",
-                    x: 300,
-                    y: 0
-                }),menu);
-        });
-        
-        //enemy that walks around          
+	//Testemunhas
+        //No tutorial -> enemy that walks around          
         Q.Sprite.extend("GroundEnemy", {
             init: function(p) {
                 this._super(p, {vx: -100, defaultDirection: "left"});
@@ -151,10 +189,12 @@
 
 
                         //load assets
-                        Q.load("tiles_map.png, player.png, slime.png, level1.tmx, level2.tmx", function() {
-                                Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});          
+                        Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png", function() {
+				Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});                    
                                 Q.stageScene("level1");
-                                Q.stageScene("menu",1);
+                                Q.stageScene("dialogo",1);
+				Q.stageScene("menu",2);
+				
                         });
 
 
@@ -168,25 +208,26 @@
 
 			});
 
- Q.scene("level1",function(stage) {
+	 Q.scene("level1",function(stage) {
           
             var background = new Q.TileLayer({ dataAsset: "level1.tmx", layerIndex: 0, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
             stage.insert(background);
             
             stage.collisionLayer(new Q.TileLayer({ dataAsset: "level1.tmx", layerIndex:1,  sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_DEFAULT }));
-          
-            var player = stage.insert(new Q.Player());
-            
+                      
             //level assets. format must be as shown: [[ClassName, params], .. ] 
             var levelAssets = [
-                ["GroundEnemy", {x: 18*70, y: 6*70, asset: "slime.png"}],
-                ["GroundEnemy", {x: 20*70, y: 6*70, asset: "slime.png"}],
-                ["GroundEnemy", {x: 12*70, y: 120, asset: "slime.png"}]
+		["casa", {x: 10*70, y: 411, asset: "matopipa2.png", points:"[[0,0],[1,1]]"}],
+                ["GroundEnemy", {x: 18*70, y: 6*70, asset: "testemunha1.png"}],
+                ["GroundEnemy", {x: 5*70, y: 6*70, asset: "testemunha2.png"}],
+                ["GroundEnemy", {x: 12*70, y: 120, asset: "testemunha3.png"}]                
             ];
             
             //load level assets
             stage.loadAssets(levelAssets);  
-                      
+          
+            var player = stage.insert(new Q.Player());
+            
             stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
           
         });
