@@ -37,30 +37,50 @@
                     if (Q.inputs['right'] && this.p.direction == 'left') {
                         this.p.flip = false;
                     }
-                   // if (Q.inputs['letraA'])
-                   // {
-                       // Q.clearStages();
-						if(contadorFase == "fase1")
+					
+						if((contadorFase == "fase1") && (Q.inputs['letraA']))
 						{
-							if (Q.inputs['letraA'])
+							contadorFase = "Fase2";
+							Q.stageScene("level2");
+							Q.stageScene("dialogo", 1);
+							Q.stageScene("menu", 2);
+						}
+						else if(contadorFase == "Fase2")
+						{
+							if (Q.inputs['letraG'] )
 							{
-								contadorFase = "Fase2";
-								Q.stageScene("level2");
+								contadorFase = "ErroMuseu";
+								Q.stageScene("level6");
 								Q.stageScene("dialogo", 1);
 								Q.stageScene("menu", 2);
 							}
-						}						
+						}
 						//outros ifs
                        // Q.stageScene("dialogo", 1);
                        // Q.stageScene("menu", 2);
                    // }
-                    if (Q.inputs['letraC'])
-                    {
-                        Q.clearStages();
-                        Q.stageScene("level3");
-                        Q.stageScene("dialogo", 1);
-                        Q.stageScene("menu", 2);
-                    }
+                    if(contadorFase== "fase1")
+					{
+						if (Q.inputs['letraC'])
+						{
+							contadorFase = "levelErroIgre"
+							//Q.clearStages();
+							Q.stageScene("levelErroIgre");
+							Q.stageScene("dialogo", 1);
+							Q.stageScene("menu", 2);
+						}
+					}
+					if(contadorFase== "Fase2")
+					{
+						if (Q.inputs['letraC'])
+						{
+							contadorFase = "levelErroIgre"
+							//Q.clearStages();
+							Q.stageScene("levelErroIgre");
+							Q.stageScene("dialogo", 1);
+							Q.stageScene("menu", 2);
+						}
+					}
 					if(contadorFase == "fase1")
 					{
 						if (Q.inputs['letraB'])
@@ -68,6 +88,50 @@
 							contadorFase = "levelErroJuru";
 							//Q.clearStages();
 							Q.stageScene("levelErroJuru");
+							Q.stageScene("dialogo", 1);
+							Q.stageScene("menu", 2);
+						}
+					}
+					if(contadorFase == "Fase2")
+					{
+						if (Q.inputs['letraH'])
+						{
+							contadorFase = "Fase3";
+							//Q.clearStages();
+							Q.stageScene("level5");
+							Q.stageScene("dialogo", 1);
+							Q.stageScene("menu", 2);
+						}
+					}
+					if(contadorFase == "Fase3")
+					{
+						if (Q.inputs['letraK'])
+						{
+							contadorFase = "Fase4";
+							//Q.clearStages();
+							Q.stageScene("level4");
+							Q.stageScene("dialogo", 1);
+							Q.stageScene("menu", 2);
+						}
+					}
+					if(contadorFase == "Fase3")
+					{
+						if (Q.inputs['letraI'])
+						{
+							contadorFase = "ErroSobrad";
+							//Q.clearStages();
+							Q.stageScene("levelErroSob");
+							Q.stageScene("dialogo", 1);
+							Q.stageScene("menu", 2);
+						}
+					}
+					if(contadorFase == "Fase3")
+					{
+						if (Q.inputs['letraJ'])
+						{
+							contadorFase = "ErroMP";
+							//Q.clearStages();
+							Q.stageScene("levelErroMP");
 							Q.stageScene("dialogo", 1);
 							Q.stageScene("menu", 2);
 						}
@@ -86,6 +150,17 @@
                         Q.stageScene("dialogo", 1);
                         Q.stageScene("menu", 2);
                     }
+					if(contadorFase == "fase1")
+					{
+						if (Q.inputs['letraF'])
+						{
+							contadorFase = "levelErroMP";
+							//Q.clearStages();
+							Q.stageScene("levelErroMP");
+							Q.stageScene("dialogo", 1);
+							Q.stageScene("menu", 2);
+						}
+					}
                 }
             });
             //Menu dialogo com as testemunhas
@@ -140,13 +215,21 @@
 				if(contadorFase == "Fase2")
 				{
 					var destino1 = stage.insert(new Q.UI.Text({
-                    label: "A - Museu      ",
+                    label: "G - Museu      ",
                     color: "black",
                     x: 0,
                     y: -75
 					}), menu);
 				}
-
+				if(contadorFase == "Fase3")
+				{
+					var destino1 = stage.insert(new Q.UI.Text({
+                    label: "I - Sobradinho      ",
+                    color: "black",
+                    x: 0,
+                    y: -75
+					}), menu);
+				}
 				/////////////////////////////////////////////==============Opção 2===============//////////////////////////////==================////////
 
 				if(contadorFase == "fase1"){
@@ -161,7 +244,16 @@
 				if(contadorFase == "Fase2"){ //opção correta
                 var destino2 = stage.insert(new Q.UI.Text({
 				
-                    label: "B - Usina         ",
+                    label: "H - Usina         ",
+                    color: "black",
+                    x: 0,
+                    y: -50
+	                }), menu);
+				}
+				if(contadorFase == "Fase3"){
+                var destino2 = stage.insert(new Q.UI.Text({
+				
+                    label: "J - Mato de Pipa         ",
                     color: "black",
                     x: 0,
                     y: -50
@@ -188,6 +280,16 @@
                     }), menu);
 
 				}
+				if(contadorFase== "Fase3"){
+				var destino3 = stage.insert(new Q.UI.Text({
+                    label: "K - Jurubatiba",
+                    color: "black",
+                    x: 0,
+                    y: -25
+                    }), menu);
+
+				}
+
 				//////////////////////////////////////=============Opção 4=============/////////////////////////////=================////////////////
                 var destino4 = stage.insert(new Q.UI.Text({
                     label: "D - Voltar                 ",
@@ -247,6 +349,27 @@
                     //this.p.initialY = this.p.y;
                 }
             });
+			Q.Sprite.extend("igreErro", {
+                init: function (p) {
+                    this._super(p, {vy: -100, rangeY: 200, });
+                    //this.add("2d");
+                    //this.p.initialY = this.p.y;
+                }
+            });
+			Q.Sprite.extend("MPErro", {
+                init: function (p) {
+                    this._super(p, {vy: -100, rangeY: 200, });
+                    //this.add("2d");
+                    //this.p.initialY = this.p.y;
+                }
+            });
+			Q.Sprite.extend("SobErro", {
+                init: function (p) {
+                    this._super(p, {vy: -100, rangeY: 200, });
+                    //this.add("2d");
+                    //this.p.initialY = this.p.y;
+                }
+            });
             //Componente geral de testemunhas (inimigos, do tutorial)
             Q.component("commonEnemy1", {
                 added: function () {
@@ -263,6 +386,34 @@
 								testemunho.p.label = "Ele conheceu uma Maria Fumaça";
 							}
 							if(contadorFase == "levelErroJuru")
+							{
+								testemunho.p.label = "Não ouvi nada sobre isso";
+							}
+							if(contadorFase == "levelErroIgre")
+							{
+								testemunho.p.label = "Não ouvi nada sobre isso";
+							}
+							if(contadorFase == "levelErroMP")
+							{
+								testemunho.p.label = "Não ouvi nada sobre isso";
+							}
+							if(contadorFase == "ErroMuseu")
+							{
+								testemunho.p.label = "Não ouvi nada sobre isso";
+							}
+							if(contadorFase == "Fase3")
+							{
+								testemunho.p.label = "Ele queria se sintonizar com a natureza";
+							}
+							if(contadorFase == "Fase4")
+							{
+								testemunho.p.label = "Parabéns!!!";
+							}
+							if(contadorFase == "ErroSobrad")
+							{
+								testemunho.p.label = "Não ouvi nada sobre isso";
+							}
+							if(contadorFase == "ErroMP")
 							{
 								testemunho.p.label = "Não ouvi nada sobre isso";
 							}
@@ -287,6 +438,34 @@
 							{
 								testemunho.p.label = "Não sei de nada não.";
 							}
+							if(contadorFase == "levelErroIgre")
+							{
+								testemunho.p.label = "Não sei de nada não.";
+							}
+							if(contadorFase == "levelErroMP")
+							{
+								testemunho.p.label = "Não sei de nada não.";
+							}
+							if(contadorFase == "ErroMuseu")
+							{
+								testemunho.p.label = "Não sei de nada não.";
+							}
+							if(contadorFase == "Fase3")
+							{
+								testemunho.p.label = "O suspeito queria tomar suco de cajú";
+							}
+							if(contadorFase == "Fase4")
+							{
+								testemunho.p.label = "Você prendeu o suspeito!";
+							}
+							if(contadorFase == "ErroSobrad")
+							{
+								testemunho.p.label = "Não sei de nada não.";
+							}
+							if(contadorFase == "ErroMP")
+							{
+								testemunho.p.label = "Não sei de nada não.";
+							}
                         }
                     });
                 },
@@ -299,12 +478,40 @@
                         if (collision.obj.isA("Player")) {
                             var testemunho = Q("UI.Text", 1).items[0];
                             if(contadorFase == "fase1"){
-							testemunho.p.label = 'Ele queria visitar a antiga estação de trem de Quissamã';
+							testemunho.p.label = 'O suspeito tinha uma cópia de O Gancho"';
 							}
 							if(contadorFase== "Fase2"){
 							testemunho.p.label = "Ele queria chegar ao lugar mais alto de Quissamã";
 							}
 							if(contadorFase == "levelErroJuru")
+							{
+								testemunho.p.label = "Do que você está falando?!";
+							}
+							if(contadorFase == "levelErroIgre")
+							{
+								testemunho.p.label = "Do que você está falando?!";
+							}
+							if(contadorFase == "levelErroMP")
+							{
+								testemunho.p.label = "Do que você está falando?!";
+							}
+							if(contadorFase == "ErroMuseu")
+							{
+								testemunho.p.label = "Do que você está falando?!";
+							}
+							if(contadorFase == "Fase3")
+							{
+								testemunho.p.label = "Ele estava falando sobre um crime na Estirinha**";
+							}
+							if(contadorFase == "Fase4")
+							{
+								testemunho.p.label = "Você venceu!!!";
+							}
+							if(contadorFase == "ErroSobrad")
+							{
+								testemunho.p.label = "Do que você está falando?!";
+							}
+							if(contadorFase == "ErroMP")
 							{
 								testemunho.p.label = "Do que você está falando?!";
 							}
@@ -434,7 +641,7 @@
              */
 
             //load assets
-            Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx, jurubatiba.png, level4.tmx, level5.tmx, usina.png, museu.png, level6.tmx, levelErroJuru.tmx ", function () {
+            Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx, jurubatiba.png, level4.tmx, level5.tmx, usina.png, museu.png, level6.tmx, levelErroJuru.tmx, levelErroIgre.tmx, levelErroMP.tmx, levelErroSob.tmx ", function () {
                 Q.sheet("tiles", "tiles_map.png", {tilew: 70, tileh: 70});
                 Q.stageScene("level1");
                 Q.stageScene("dialogo", 1);
@@ -671,7 +878,108 @@
                 stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 
             });
+			//level errado Igreja
 			
+			
+				Q.scene("levelErroIgre", function (stage) {
+                var background = new Q.TileLayer({dataAsset: 'levelErroIgre.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+                stage.collisionLayer(new Q.TileLayer({dataAsset: 'levelErroIgre.tmx', layerIndex: 1, sheet: 'tiles', tileW: 70, tileH: 70}));
+
+                var player = stage.insert(new Q.Player());
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
+
+            Q.scene("levelErroIgre", function (stage) {
+
+                var background = new Q.TileLayer({dataAsset: "levelErroIgre.tmx", layerIndex: 0, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+
+                stage.collisionLayer(new Q.TileLayer({dataAsset: "levelErroIgre.tmx", layerIndex: 1, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_DEFAULT}));
+
+                //level assets. format must be as shown: [[ClassName, params], .. ] 
+                var levelAssets = [
+                    ["igreErro", {x: 10 * 70, y: 411, asset: "igrejaDoCarmo.png", points: "[[0,0],[1,1]]"}],
+                    ["testemunha01", {x: 18 * 70, y: 6 * 70, asset: "testemunha1.png"}],
+                    ["testemunha02", {x: 5 * 70, y: 6 * 70, asset: "testemunha2.png"}],
+                    ["testemunha03", {x: 12 * 70, y: 120, asset: "testemunha3.png"}]
+                ];
+
+                //load level assets
+                stage.loadAssets(levelAssets);
+
+                var player = stage.insert(new Q.Player());
+
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
+						// Level errado M.P
+							Q.scene("levelErroMP", function (stage) {
+                var background = new Q.TileLayer({dataAsset: 'levelErroMP.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+                stage.collisionLayer(new Q.TileLayer({dataAsset: 'levelErroMP.tmx', layerIndex: 1, sheet: 'tiles', tileW: 70, tileH: 70}));
+
+                var player = stage.insert(new Q.Player());
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
+            Q.scene("levelErroMP", function (stage) {
+
+                var background = new Q.TileLayer({dataAsset: "levelErroMP.tmx", layerIndex: 0, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+
+                stage.collisionLayer(new Q.TileLayer({dataAsset: "levelErroMP.tmx", layerIndex: 1, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_DEFAULT}));
+
+                //level assets. format must be as shown: [[ClassName, params], .. ] 
+                var levelAssets = [
+                    ["MPErro", {x: 10 * 70, y: 411, asset: "matopipa2.png", points: "[[0,0],[1,1]]"}],
+                    ["testemunha01", {x: 18 * 70, y: 6 * 70, asset: "testemunha1.png"}],
+                    ["testemunha02", {x: 5 * 70, y: 6 * 70, asset: "testemunha2.png"}],
+                    ["testemunha03", {x: 12 * 70, y: 120, asset: "testemunha3.png"}]
+                ];
+
+                //load level assets
+                stage.loadAssets(levelAssets);
+
+                var player = stage.insert(new Q.Player());
+
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
+			// sobradinho erro
+										Q.scene("levelErroSob", function (stage) {
+                var background = new Q.TileLayer({dataAsset: 'levelErroSob.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+                stage.collisionLayer(new Q.TileLayer({dataAsset: 'levelErroSob.tmx', layerIndex: 1, sheet: 'tiles', tileW: 70, tileH: 70}));
+
+                var player = stage.insert(new Q.Player());
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
+            Q.scene("levelErroSob", function (stage) {
+
+                var background = new Q.TileLayer({dataAsset: "levelErroSob.tmx", layerIndex: 0, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+
+                stage.collisionLayer(new Q.TileLayer({dataAsset: "levelErroSob.tmx", layerIndex: 1, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_DEFAULT}));
+
+                //level assets. format must be as shown: [[ClassName, params], .. ] 
+                var levelAssets = [
+                    ["SobErro", {x: 10 * 70, y: 411, asset: "sobradinho2.png", points: "[[0,0],[1,1]]"}],
+                    ["testemunha01", {x: 18 * 70, y: 6 * 70, asset: "testemunha1.png"}],
+                    ["testemunha02", {x: 5 * 70, y: 6 * 70, asset: "testemunha2.png"}],
+                    ["testemunha03", {x: 12 * 70, y: 120, asset: "testemunha3.png"}]
+                ];
+
+                //load level assets
+                stage.loadAssets(levelAssets);
+
+                var player = stage.insert(new Q.Player());
+
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
         </script>
     </body>
 </html>
