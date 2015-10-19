@@ -62,6 +62,13 @@
                         Q.stageScene("dialogo", 1);
                         Q.stageScene("menu", 2);
                     }
+					if (Q.inputs['letraD'])
+                    {
+                        Q.clearStages();
+                        Q.stageScene("level6");
+                        Q.stageScene("dialogo", 1);
+                        Q.stageScene("menu", 2);
+                    }
                 }
             });
             //Menu dialogo com as testemunhas
@@ -160,6 +167,13 @@
                 }
             });
 			Q.Sprite.extend("varUsina", {
+                init: function (p) {
+                    this._super(p, {vy: -100, rangeY: 200, });
+                    //this.add("2d");
+                    //this.p.initialY = this.p.y;
+                }
+            });
+			Q.Sprite.extend("museuQS", {
                 init: function (p) {
                     this._super(p, {vy: -100, rangeY: 200, });
                     //this.add("2d");
@@ -327,7 +341,7 @@
              */
 
             //load assets
-            Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx, jurubatiba.png, level4.tmx, level5.tmx, usina.png ", function () {
+            Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx, jurubatiba.png, level4.tmx, level5.tmx, usina.png, museu.png, level6.tmx ", function () {
                 Q.sheet("tiles", "tiles_map.png", {tilew: 70, tileh: 70});
                 Q.stageScene("level1");
                 Q.stageScene("dialogo", 1);
@@ -483,6 +497,38 @@
 
                 var levelAssets = [
                     ["varUsina", {x: 10 * 70, y: 411, asset: "usina.png", points: "[[0,0],[1,1]]"}], //carrega o sobradinho e as testemunhas
+                    ["testemunha01", {x: 18 * 70, y: 6 * 70, asset: "testemunha1.png"}],
+                    ["testemunha02", {x: 5 * 70, y: 6 * 70, asset: "testemunha2.png"}],
+                    ["testemunha03", {x: 12 * 70, y: 120, asset: "testemunha3.png"}]
+                ];
+
+                //load level assets
+                stage.loadAssets(levelAssets);
+
+                var player = stage.insert(new Q.Player());
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
+			
+			
+			Q.scene("level6", function (stage) {
+                var background = new Q.TileLayer({dataAsset: 'level6.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+                stage.collisionLayer(new Q.TileLayer({dataAsset: 'level6.tmx', layerIndex: 1, sheet: 'tiles', tileW: 70, tileH: 70}));
+
+                var player = stage.insert(new Q.Player());
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
+
+            Q.scene("level6", function (stage) {
+                var background = new Q.TileLayer({dataAsset: 'level6.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+                stage.collisionLayer(new Q.TileLayer({dataAsset: 'level6.tmx', layerIndex: 1, sheet: 'tiles', tileW: 70, tileH: 70}));
+                //setupLevel("level2",stage);
+
+                var levelAssets = [
+                    ["museuQS", {x: 10 * 70, y: 411, asset: "museu.png", points: "[[0,0],[1,1]]"}], //carrega o sobradinho e as testemunhas
                     ["testemunha01", {x: 18 * 70, y: 6 * 70, asset: "testemunha1.png"}],
                     ["testemunha02", {x: 5 * 70, y: 6 * 70, asset: "testemunha2.png"}],
                     ["testemunha03", {x: 12 * 70, y: 120, asset: "testemunha3.png"}]
