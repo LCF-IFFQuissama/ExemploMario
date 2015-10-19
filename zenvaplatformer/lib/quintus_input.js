@@ -3,7 +3,7 @@
 Quintus.Input = function(Q) {
   var KEY_NAMES = { LEFT: 37, RIGHT: 39, SPACE: 32,
                     UP: 38, DOWN: 40,
-                    Z: 90, X: 88, A: 65, B: 66, C: 67, D:68   
+                    Z: 90, X: 88, A: 65, B: 66, C: 67, D:68, E:69   
                   };
   
   var DEFAULT_KEYS = { LEFT: 'left', RIGHT: 'right',
@@ -14,7 +14,8 @@ Quintus.Input = function(Q) {
 					   A: 'letraA',
 					   B: 'letraB',
 					   C: 'letraC',
-					   D: 'letraD'};
+					   D: 'letraD',
+					   E: 'letraE'};
 
   var DEFAULT_TOUCH_CONTROLS  = [ ['left','<' ],
                             ['right','>' ],
