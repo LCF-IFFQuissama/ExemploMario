@@ -16,6 +16,7 @@
     </head>
     <body style="background-color: black;">
         <script>
+			var Game_over = "sem erro";
             var contadorFase = "fase1";
             var Q = Quintus({ audioSupported: [ 'mp3' ] })
                     .include("Sprites, Scenes, Input, 2D, Touch, UI, Audio")
@@ -83,15 +84,33 @@
                     }
                     if (contadorFase == "fase1")
                     {
-                        if (Q.inputs['letraB'])
-                        {
-                            contadorFase = "levelErroJuru";
-                            //Q.clearStages();
-                            Q.stageScene("levelErroJuru");
-                            Q.stageScene("dialogo", 1);
-                            Q.stageScene("menu", 2);
-                        }
-                    }
+						if(Game_over == "sem erro")
+						{
+							if (Q.inputs['letraB'])
+							{
+								Game_over = "erro1";
+								contadorFase = "levelErroJuru";
+								//Q.clearStages();
+								Q.stageScene("levelErroJuru");
+								Q.stageScene("dialogo", 1);
+								Q.stageScene("menu", 2);
+								
+								
+							}	
+						}
+					}
+					if (contadorFase == "fase1")
+                    {
+						if(Game_over == "erro1")
+						{	
+							if(Q.inputs['letraB'])
+							{
+								//Q.clearStages();
+								Q.stageScene("GO");	
+							}
+						}
+					}
+                    	
                     if (contadorFase == "Fase2")
                     {
                         if (Q.inputs['letraH'])
@@ -188,6 +207,21 @@
                 }), dialogo);
             });
 
+			//Game Over
+			 Q.scene("GO", function (stage) {
+                var menu = stage.insert(new Q.UI.Container({
+                    fill: "white",
+                    x: 960 / 2 + 300,
+                    y: 620,
+                    border: 1,
+                    shadow: 3,
+                    shadowColor: "rgba(0,0,0,0.5)",
+                    w: 2000,
+                    h: 5000
+                })
+                        );
+				});
+			
             //Menu
             Q.scene("menu", function (stage) {
                 var menu = stage.insert(new Q.UI.Container({
@@ -373,6 +407,13 @@
                     //this.p.initialY = this.p.y;
                 }
             });
+			Q.Sprite.extend("gameOver", {
+                init: function (p) {
+                    this._super(p, {vy: -100, rangeY: 200, });
+                    //this.add("2d");
+                    //this.p.initialY = this.p.y;
+                }
+            });
             //Componente geral de testemunhas (inimigos, do tutorial)
             Q.component("commonEnemy1", {
                 added: function () {
@@ -390,6 +431,7 @@
                             }
                             if (contadorFase == "levelErroJuru")
                             {
+								Game_over= "erro1"
                                 testemunho.p.label = "Não ouvi nada sobre isso";
                             }
                             if (contadorFase == "levelErroIgre")
@@ -644,7 +686,7 @@
              */
 
             //load assets
-            Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx, jurubatiba.png, level4.tmx, level5.tmx, usina.png, museu.png, level6.tmx, levelErroJuru.tmx, levelErroIgre.tmx, levelErroMP.tmx, levelErroSob.tmx ", function () {
+            Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx, jurubatiba.png, level4.tmx, level5.tmx, usina.png, museu.png, level6.tmx, levelErroJuru.tmx, levelErroIgre.tmx, levelErroMP.tmx, levelErroSob.tmx, gameover.png, levelGO.tmx", function () {
                 Q.sheet("tiles", "tiles_map.png", {tilew: 70, tileh: 70});
                 Q.stageScene("level1");
                 Q.stageScene("dialogo", 1);
@@ -983,6 +1025,37 @@
                 stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 
             });
+			
+			//game over
+			/*    Q.scene("levelGO", function (stage) {
+                var background = new Q.TileLayer({dataAsset: 'levelGO.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+                stage.collisionLayer(new Q.TileLayer({dataAsset: 'levelGO.tmx', layerIndex: 1, sheet: 'tiles', tileW: 70, tileH: 70}));
+
+                var player = stage.insert(new Q.Player());
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });
+            Q.scene("levelGO", function (stage) {
+
+                var background = new Q.TileLayer({dataAsset: "levelGO.tmx", layerIndex: 0, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                stage.insert(background);
+
+                stage.collisionLayer(new Q.TileLayer({dataAsset: "levelGO.tmx", layerIndex: 1, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_DEFAULT}));
+
+                //level assets. format must be as shown: [[ClassName, params], .. ] 
+                var levelAssets = [
+                    ["gameOver", {x: 10 * 70, y: 411, asset: "gameover.png", points: "[[0,0],[1,1]]"}]
+                ];
+
+                //load level assets
+                stage.loadAssets(levelAssets);
+
+                var player = stage.insert(new Q.Player());
+
+                stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+
+            });*/
         </script>
     </body>
 </html>

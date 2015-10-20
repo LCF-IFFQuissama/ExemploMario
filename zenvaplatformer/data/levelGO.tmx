@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="10" tilewidth="70" tileheight="70" nextobjectid="1">
+ <tileset firstgid="1" name="gameover" tilewidth="70" tileheight="70" tilecount="22">
+  <image source="../images/gameover.png" trans="ff00ff" width="803" height="157"/>
+ </tileset>
+ <layer name="Camada de Tiles 1" width="40" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKRCRiBmAmImYGYD4i5BgAzEpBDdt9AuREXBgDXAwL0
+  </data>
+ </layer>
+</map>
