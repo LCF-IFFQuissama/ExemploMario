@@ -13,9 +13,6 @@
         <script src='lib/quintus_ui.js'></script>
     </head>
     <body style="background-color: black;">
-        <div style="background-color: white">
-            <p>oi</p>
-        </div>
         <script>
             var contadorFase = "fase1";
             var Q = Quintus()
@@ -202,62 +199,62 @@
                 })
                         );
                 var opcao = stage.insert(new Q.UI.Text({
-                    label: "Digite uma das opções:",
-                    color: "red",
+                    label: "Caminhos possíveis:",
+                    color: "gray",
                     x: 0,
                     y: -100
                 }), menu);
                 if (contadorFase == "fase1")
                 {
                     var destino1 = stage.insert(new Q.UI.Text({
-                        label: "A - Sobradinho      ",
+                        label: "A - Sobradinho",
                         color: "black",
                         x: 0,
-                        y: -75
+                        y: -65
                     }), menu);
                 }
                 if (contadorFase == "Fase2")
                 {
                     var destino1 = stage.insert(new Q.UI.Text({
-                        label: "G - Museu      ",
+                        label: "G - Museu",
                         color: "black",
                         x: 0,
-                        y: -75
+                        y: -65
                     }), menu);
                 }
                 if (contadorFase == "Fase3")
                 {
                     var destino1 = stage.insert(new Q.UI.Text({
-                        label: "I - Sobradinho      ",
+                        label: "I - Sobradinho",
                         color: "black",
                         x: 0,
-                        y: -75
+                        y: -65
                     }), menu);
                 }
                 /////////////////////////////////////////////==============Opção 2===============//////////////////////////////==================////////
 
                 if (contadorFase == "fase1") {
                     var destino2 = stage.insert(new Q.UI.Text({
-                        label: "B - Jurubatiba         ",
+                        label: "B - Jurubatiba",
                         color: "black",
                         x: 0,
-                        y: -50
+                        y: -40
                     }), menu);
                 }
                 if (contadorFase == "Fase2") { //opção correta
                     var destino2 = stage.insert(new Q.UI.Text({
-                        label: "H - Usina         ",
+                        label: "H - Usina",
                         color: "black",
                         x: 0,
-                        y: -50
+                        y: -40
                     }), menu);
                 }
                 if (contadorFase == "Fase3") {
                     var destino2 = stage.insert(new Q.UI.Text({
-                        label: "J - Mato de Pipa         ",
+                        label: "J - Mato de Pipa",
                         color: "black",
                         x: 0,
-                        y: -50
+                        y: -40
                     }), menu);
                 }
 
@@ -267,7 +264,7 @@
                         label: "C - Igreja do Carmo",
                         color: "black",
                         x: 0,
-                        y: -25
+                        y: -15
                     }), menu);
 
                 }
@@ -276,7 +273,7 @@
                         label: "C - Igreja do Carmo",
                         color: "black",
                         x: 0,
-                        y: -25
+                        y: -15
                     }), menu);
 
                 }
@@ -285,7 +282,7 @@
                         label: "K - Jurubatiba",
                         color: "black",
                         x: 0,
-                        y: -25
+                        y: -15
                     }), menu);
 
                 }
@@ -294,10 +291,10 @@
                 if(contadorFase == "levelErroIgre" || contadorFase == "levelErroJuru" || contadorFase == "ErroMP" || contadorFase == "ErroSobrad" || contadorFase == "ErroMuseu")
 				{
 					var destino4 = stage.insert(new Q.UI.Text({
-						label: "D - Voltar                 ",
+						label: "D - Voltar",
 						color: "black",
 						x: 0,
-						y: -25
+						y: -50
 					}), menu);
 				}
             });
@@ -435,7 +432,7 @@
                                 testemunho.p.label = 'Ele queria assistir filmes';
                             }
                             if (contadorFase == "Fase2") {
-                                testemunho.p.label = "Ele queria chegar ao lugar mais alto de Quissamã";
+                                testemunho.p.label = "Ele falou do ponto mais alto de Quissamã";
                             }
                             if (contadorFase == "levelErroJuru")
                             {
@@ -504,7 +501,7 @@
                             }
                             if (contadorFase == "Fase3")
                             {
-                                testemunho.p.label = "Ele estava falando sobre um crime na Estirinha**";
+                                testemunho.p.label = "Ele estava falando de um crime na Estivinha";
                             }
                             if (contadorFase == "Fase4")
                             {
