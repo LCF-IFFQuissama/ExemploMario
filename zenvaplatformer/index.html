@@ -11,12 +11,15 @@
         <script src='lib/quintus_2d.js'></script>
         <script src='lib/quintus_touch.js'></script>
         <script src='lib/quintus_ui.js'></script>
+        <script src='lib/quintus_ui.js'></script>
+        <script src='lib/quintus_audio.js'></script>
     </head>
     <body style="background-color: black;">
         <script>
             var contadorFase = "fase1";
-            var Q = Quintus()
-                    .include("Sprites, Scenes, Input, 2D, Touch, UI")
+            var Q = Quintus({ audioSupported: [ 'mp3' ] })
+                    .include("Sprites, Scenes, Input, 2D, Touch, UI, Audio")
+                    .enableSound()
                     .setup({
                         width: 960,
                         height: 640
