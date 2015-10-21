@@ -163,6 +163,7 @@
 								Q.stageScene("GO");	
 								Q.stageScene("dialogo2", 1);
 								Q.stageScene("menu2", 2);
+								//Q.stageScene("Jao");
 							}
 						}
 					}
@@ -451,7 +452,7 @@
 			//sumir menu
 			Q.scene("menu2", function (stage) {
                 var menu2 = stage.insert(new Q.UI.Container({
-                    fill: "blue",
+                    fill: "black",
                     x: 960 / 2 + 300,
                     y: 620,
                     border: 0,
@@ -539,7 +540,7 @@
                     //this.p.initialY = this.p.y;
                 }
             });
-			Q.Sprite.extend("gameOver", {
+			Q.Sprite.extend("bandido", {
                 init: function (p) {
                     this._super(p, {vy: -100, rangeY: 200, });
                     //this.add("2d");
@@ -818,7 +819,7 @@
              */
 
             //load assets
-            Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx, jurubatiba.png, level4.tmx, level5.tmx, usina.png, museu.png, level6.tmx, levelErroJuru.tmx, levelErroIgre.tmx, levelErroMP.tmx, levelErroSob.tmx, gameover.png, levelGO.tmx", function () {
+            Q.load("tiles_map.png, player.png, testemunha1.png, testemunha2.png, testemunha3.png, level1.tmx, level2.tmx, matopipa2.png, sobradinho2.png, igrejaDoCarmo.png, level3.tmx, jurubatiba.png, level4.tmx, level5.tmx, usina.png, museu.png, level6.tmx, levelErroJuru.tmx, levelErroIgre.tmx, levelErroMP.tmx, levelErroSob.tmx, gameover.png, levelGO.tmx, jao.png", function () {
                 Q.sheet("tiles", "tiles_map.png", {tilew: 70, tileh: 70});
                 Q.stageScene("level1");
                 Q.stageScene("dialogo", 1);
@@ -1159,25 +1160,27 @@
             });
 			
 			//game over
-			/*    Q.scene("levelGO", function (stage) {
-                var background = new Q.TileLayer({dataAsset: 'levelGO.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+			    Q.scene("Jao", function (stage) {
+                var background = new Q.TileLayer({dataAsset: 'levelErroSob.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
                 stage.insert(background);
-                stage.collisionLayer(new Q.TileLayer({dataAsset: 'levelGO.tmx', layerIndex: 1, sheet: 'tiles', tileW: 70, tileH: 70}));
+                stage.collisionLayer(new Q.TileLayer({dataAsset: 'levelErroSob.tmx', layerIndex: 1, sheet: 'tiles', tileW: 70, tileH: 70}));
 
                 var player = stage.insert(new Q.Player());
                 stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 
             });
-            Q.scene("levelGO", function (stage) {
+            Q.scene("Jao", function (stage) {
 
-                var background = new Q.TileLayer({dataAsset: "levelGO.tmx", layerIndex: 0, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
+                var background = new Q.TileLayer({dataAsset: "levelErroSob.tmx", layerIndex: 0, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_NONE});
                 stage.insert(background);
 
-                stage.collisionLayer(new Q.TileLayer({dataAsset: "levelGO.tmx", layerIndex: 1, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_DEFAULT}));
-
+                stage.collisionLayer(new Q.TileLayer({dataAsset: "levelErroSob.tmx", layerIndex: 1, sheet: "tiles", tileW: 70, tileH: 70, type: Q.SPRITE_DEFAULT}));
                 //level assets. format must be as shown: [[ClassName, params], .. ] 
                 var levelAssets = [
-                    ["gameOver", {x: 10 * 70, y: 411, asset: "gameover.png", points: "[[0,0],[1,1]]"}]
+                    ["bandido", {x: 10 * 70, y: 411, asset: "jao.png", points: "[[0,0],[1,1]]"}],
+                    ["testemunha01", {x: 18 * 70, y: 6 * 70, asset: "testemunha1.png"}],
+                    ["testemunha02", {x: 5 * 70, y: 6 * 70, asset: "testemunha2.png"}],
+                    ["testemunha03", {x: 12 * 70, y: 120, asset: "testemunha3.png"}]
                 ];
 
                 //load level assets
@@ -1187,7 +1190,7 @@
 
                 stage.add("viewport").follow(player, {x: true, y: true}, {minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 
-            });*/
+            });
         </script>
     </body>
 </html>
