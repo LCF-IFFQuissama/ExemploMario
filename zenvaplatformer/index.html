@@ -303,7 +303,7 @@
 			//sumir dialogo
 			Q.scene("dialogo2", function (stage) {
                 var dialogo2 = stage.insert(new Q.UI.Container({
-                    fill: "white",
+                    fill: "black",
                     x: 960 / 2 - 150,
                     y: 620,
                     border: 0,
@@ -323,7 +323,7 @@
 			//Game Over
 			 Q.scene("GO", function (stage) {
                 var menu = stage.insert(new Q.UI.Container({
-                    fill: "white",
+                    fill: "black",
                     x: 960 / 2 + 300,
                     y: 620,
                     border: 1,
@@ -451,22 +451,22 @@
 			//sumir menu
 			Q.scene("menu2", function (stage) {
                 var menu2 = stage.insert(new Q.UI.Container({
-                    fill: "white",
+                    fill: "blue",
                     x: 960 / 2 + 300,
                     y: 620,
                     border: 0,
                     shadow: 0,
                     shadowColor: "rgba(0,0,0,0.5)",
-                    w: 290,
-                    h: 230
+                    w: 2000,
+                    h: 5000
                 })
                         );
-                var opcao = stage.insert(new Q.UI.Text({
-                    label: "",
-                    color: "gray",
-                    x: 0,
-                    y: -100
-                }), menu);
+                var opcao2 = stage.insert(new Q.UI.Text({
+                    label: "Você se perdeu e o João Gambá fugiu novamente",
+                    color: "white",
+                    x: -295,
+                    y: -290
+                }), menu2);
 			});
             //posicionamento das imagens dos level's
             Q.Sprite.extend("casa", {
