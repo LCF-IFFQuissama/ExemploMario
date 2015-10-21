@@ -68,6 +68,8 @@
 							if (Q.inputs['letraG'])
 							{
 								Q.stageScene("GO");
+								Q.stageScene("dialogo2", 1);
+								Q.stageScene("menu2", 2);
 							}
 						}
                     }
@@ -99,6 +101,8 @@
 							{
 								//Q.clearStages();
 								Q.stageScene("GO");
+								Q.stageScene("dialogo2", 1);
+								Q.stageScene("menu2", 2);
 							}
 						}
                     }
@@ -126,6 +130,8 @@
 							{
 								//Q.clearStages();
 								Q.stageScene("GO");
+								Q.stageScene("dialogo2", 1);
+								Q.stageScene("menu2", 2);
 							}
 						}
                     }
@@ -155,6 +161,8 @@
 							{
 								//Q.clearStages();
 								Q.stageScene("GO");	
+								Q.stageScene("dialogo2", 1);
+								Q.stageScene("menu2", 2);
 							}
 						}
 					}
@@ -209,6 +217,8 @@
 							{
 								//Q.clearStages();
 								Q.stageScene("GO");	
+								Q.stageScene("dialogo2", 1);
+								Q.stageScene("menu2", 2);
 							}
 						}
 					}
@@ -234,7 +244,9 @@
 						{
 							if (Q.inputs['letraJ'])
 							{
-							Q.stageScene("GO");
+								Q.stageScene("GO");
+								Q.stageScene("dialogo2", 1);
+								Q.stageScene("menu2", 2);
 							}
 						}
 					}
@@ -288,6 +300,26 @@
                 }), dialogo);
             });
 
+			//sumir dialogo
+			Q.scene("dialogo2", function (stage) {
+                var dialogo2 = stage.insert(new Q.UI.Container({
+                    fill: "white",
+                    x: 960 / 2 - 150,
+                    y: 620,
+                    border: 0,
+                    shadow: 0,
+                    shadowColor: "rgba(0,0,0,0.5)",
+                    w: 550,
+                    h: 230
+                })
+                        );
+                var testemunha = stage.insert(new Q.UI.Text({
+                    label: "",
+                    color: "black",
+                    x: 0,
+                    y: -60
+                }), dialogo2);
+            });
 			//Game Over
 			 Q.scene("GO", function (stage) {
                 var menu = stage.insert(new Q.UI.Container({
@@ -416,7 +448,26 @@
 					}), menu);
 				}
             });
-
+			//sumir menu
+			Q.scene("menu2", function (stage) {
+                var menu2 = stage.insert(new Q.UI.Container({
+                    fill: "white",
+                    x: 960 / 2 + 300,
+                    y: 620,
+                    border: 0,
+                    shadow: 0,
+                    shadowColor: "rgba(0,0,0,0.5)",
+                    w: 290,
+                    h: 230
+                })
+                        );
+                var opcao = stage.insert(new Q.UI.Text({
+                    label: "",
+                    color: "gray",
+                    x: 0,
+                    y: -100
+                }), menu);
+			});
             //posicionamento das imagens dos level's
             Q.Sprite.extend("casa", {
                 init: function (p) {
